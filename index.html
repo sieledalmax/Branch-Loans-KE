@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Get instant loans up to Ksh 100,000 at 7.5% interest. Quick approval, flexible repayment. Apply online today!">
+    <link rel="icon" type="image/png" href="IMG-20250323-WA0008.png" />
+    <title>BRANCH LOANS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* ===== Base Styles ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(135deg, #8ce9e9 0%, #e2e8f0 100%);
+            color: #2c3749;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            color: #2c5282;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(31, 38, 135, 0.2);
+        }
+
+        h2 {
+            color: #2c5282;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .special-offer {
+            background: linear-gradient(135deg, #2c5282 0%, #2b6cb0 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+        }
+
+        .badge {
+            background-color: #fff;
+            color: #2c5282;
+            font-weight: bold;
+            padding: 6px 12px;
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        .highlight {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, #2c5282 0%, #2b6cb0 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(44, 82, 130, 0.3);
+            margin-top: 20px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(44, 82, 130, 0.4);
+        }
+
+        .checkbox-wrapper {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(237, 242, 247, 0.7);
+            border-radius: 8px;
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .checkbox-wrapper input {
+            margin-right: 10px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            background: #2d3748;
+            color: white;
+            margin-top: auto;
+        }
+
+        /* ===== Functional Styles ===== */
+        .loader {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 40px;
+            height: 40px;
+            margin: -20px 0 0 -20px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #007acc;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            z-index: 9999;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #ff4d4d;
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1000;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            font-size: 1rem;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+
+        .toast.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .trust-badges {
+            text-align: center;
+            margin: 15px 0;
+            font-size: 0.9rem;
+            color: #4a5568;
+        }
+
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .step {
+            flex: 1;
+            font-size: 0.9rem;
+            color: #4a5568;
+        }
+
+        .step-number {
+            background: #2c5282;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            .progress-steps {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body class="login-body">
+    <div class="container">
+        <h1>Loans up to Ksh 100,000</h1>
+
+        <div class="section special-offer">
+            <div class="badge">🔥 Special Offer!!</div>
+            <p class="highlight">Get Your Loan with <strong>7.5% Interest Rates</strong></p>
+            <p>For Qualified Borrowers</p>
+        </div>
+
+        <div class="progress-steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div>Apply Online</div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div>Get Approved</div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div>Receive Money</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Quick Loan Approval</h2>
+            <p>Get pre-approved in minutes with our streamlined digital process.</p>
+        </div>
+
+        <div class="section">
+            <h2>Flexible Terms</h2>
+            <p>Choose loan terms from 30 to 90 days that fit your budget</p>
+        </div>
+
+        <div class="checkbox-wrapper">
+            <input type="checkbox" id="agreeCheckbox" />
+            <label for="agreeCheckbox">I agree to <a href="/terms">Terms & Conditions</a></label>
+        </div>
+
+        <button id="startBtn">👉 Get Instant Approval Now</button>
+
+        <div class="trust-badges">
+            <small>🔒 Secure | Licensed by CBK | SSL Encrypted</small>
+        </div>
+
+        <div id="loader" class="loader" style="display: none;"></div>
+    </div>
+
+    <footer class="footer">
+        <a href="/privacy">Privacy</a> | <a href="/terms">Terms</a> | <a href="/contact">Contact</a>
+        <p>&copy; 2025 BRANCH LOANS. Licensed by CBK.</p>
+    </footer>
+
+    <script>
+        document.getElementById('startBtn').addEventListener('click', () => {
+            const checkbox = document.getElementById('agreeCheckbox');
+            const loader = document.getElementById('loader');
+
+            if (!checkbox.checked) {
+                showToast('❌ Please agree to the terms before continuing.');
+                return;
+            }
+
+            loader.style.display = 'block';
+
+            setTimeout(() => {
+                window.location.href = 'login.html';
+                loader.style.display = 'none';
+            }, 2000);
+        });
+
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = "toast";
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.add("show");
+            }, 100);
+            
+            setTimeout(() => {
+                toast.classList.remove("show");
+                setTimeout(() => {
+                    document.body.removeChild(toast);
+                }, 500);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
