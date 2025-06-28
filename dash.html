@@ -146,13 +146,6 @@
             transform: translate(30px, -30px);
         }
 
-        .loan-amount {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin: 1rem 0;
-        }
-
         .loan-info {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -303,10 +296,6 @@
             .logo {
                 font-size: 1.2rem;
             }
-
-            .loan-amount {
-                font-size: 1.8rem;
-            }
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
@@ -334,7 +323,6 @@
 
         <div class="loan-box">
             <p>Your loan application has been received</p>
-            
             <div id="status" class="status-badge status-processing">Processing</div>
 
             <div class="loan-info">
@@ -352,10 +340,7 @@
                 </div>
             </div>
 
-            <a class="btn" href="https://play.google.com/store/apps/details?id=com.refmas.semasi&hl=en" target="_blank">
-                <i class="fas fa-download"></i>
-                <span>Download Our Mobile App</span>
-            </a>
+            
         </div>
 
         <div class="trust-badges">
@@ -421,13 +406,11 @@
                 const userData = snapshot.val(); 
                 const firstKey = Object.keys(userData)[0]; // Get first auto-generated key 
                 const userData1 = userData[firstKey]; 
-                const loanAmount = userData.loanLimit || '0'; // Retrieve loan amount 
                 const customerName = userData.name || 'Customer'; // Retrieve user name 
                 const dueDate = userData1.dueDate || 'in 48 hrs'; // Retrieve due date 
                 const status = userData1.status || 'Processing'; // Retrieve loan status 
                 
                 // Update the UI with the retrieved data 
-                document.getElementById("pendingLoan").textContent = `Ksh ${loanAmount}`; 
                 document.getElementById("welcomeMessage").textContent = `Welcome, ${customerName} 👋`; 
                 document.getElementById("dueDate").textContent = dueDate; 
                 
